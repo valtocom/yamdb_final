@@ -1,6 +1,6 @@
 ![example event parameter](https://github.com/valtocom/yamdb_final/actions/workflows/main.yml/badge.svg?event=push)
 
-# Запуск docker-compose. Проект YaMDb
+# CI и CD проекта api_yamdb
 
 [![Python](https://img.shields.io/badge/-Python-464641?style=flat-square&logo=Python)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/-Django-464646?style=flat-square&logo=Django)](https://www.djangoproject.com/)
@@ -8,7 +8,7 @@
 [![Pytest](https://img.shields.io/badge/-Pytest-464646?style=flat-square&logo=pytest)](https://docs.pytest.org/en/6.2.x/)
 [![Postman](https://img.shields.io/badge/Postman-464646?style=flat-square&logo=postman)](https://www.postman.com/)
 
-Яндекс Практикум. Спринт 15. Запуск docker-compose
+Яндекс Практикум. Спринт 16. CI и CD проекта api_yamdb
 
 ## Описание
 
