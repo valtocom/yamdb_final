@@ -1,3 +1,5 @@
+![example event parameter](https://github.com/valtocom/yamdb_final/actions/workflows/main.yml/badge.svg?event=push)
+
 # Запуск docker-compose. Проект YaMDb
 
 [![Python](https://img.shields.io/badge/-Python-464641?style=flat-square&logo=Python)](https://www.python.org/)
