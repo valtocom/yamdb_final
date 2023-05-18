@@ -24,94 +24,77 @@
 
 ## Установка
 
-1. Проверить наличие Docker
+1. Клонировать репозиторий:
 
-   Прежде чем приступать к работе, убедиться что Docker установлен, для этого ввести команду:
-
-   ```bash
-   docker -v
-   ```
-
-   В случае отсутствия, скачать [Docker Desktop](https://www.docker.com/products/docker-desktop) для Mac или Windows. [Docker Compose](https://docs.docker.com/compose) будет установлен автоматически.
-
-   В Linux проверить, что установлена последняя версия [Compose](https://docs.docker.com/compose/install/).
-
-   Также можно воспользоваться официальной [инструкцией](https://docs.docker.com/engine/install/).
-
-2. Клонировать репозиторий на локальный компьютер
-
-   ```bash
-   git clone https://github.com/valtocom/infra_sp2.git
-   ```
-
-3. В корневой директории создать файл `.env`, согласно примеру:
-
-   ```bash
-   DB_ENGINE=django.db.backends.postgresql
-   DB_NAME=postgres
-   POSTGRES_USER=postgres
-   POSTGRES_PASSWORD=postgres
-   DB_HOST=db
-   DB_PORT=5432
-   ```
-
-4. Запустить `docker-compose`
-
-   Выполнить из корневой директории команду:
-
-   ```bash
-   docker container run --detach
-   ```
-
-5. Заполнить базу данных
-
-   Создать и выполнить миграции:
-
-   ```bash
-   docker-compose exec web python manage.py makemigrations --noinput
-   docker-compose exec web python manage.py migrate --noinput
-   ```
-
-6. Подгрузить статику
-
-   ```bash
-   docker-compose exec web python manage.py collectstatic --no-input
-   ```
-
-7. Заполнить БД тестовыми данными
-
-   Для заполнения базы использовать файл `fixtures.json`, в директории `infra_sp2`. Выполните команду:
-
-   ```bash
-   docker-compose exec web python manage.py dumpdata > fixtures.json
-   ```
-
-8. Создать суперпользователя
-
-   ```bash
-   docker-compose exec web python manage.py createsuperuser
-   ```
-
-9. Остановить работу всех контейнеров
-
-   ```bash
-   docker-compose down -v
-   ```
-
-10. Пересобрать и запустить контейнеры
-
-    ```bash
-    docker-compose up -d --build
+    ```python
+    git clone git@github.com:valtocom/yamdb_final.git
     ```
 
-11. Мониторинг запущенных контейнеров
+2. Создать и активировать виртуальное пространство, установить зависимости и запустить тесты:
 
-    ```bash
-    docker stats
+    Для Windows:
+
+    ```python
+    cd yamdb_final
+    python -m venv venv
+    source venv/Scripts/activate
+    cd api_yamdb
+    pip install -r requirements.txt
+    cd ..
+    pytest
     ```
 
-12. Остановить и удалить контейнеры, тома и образы
+    Для Mac/Linux:
 
-    ```bash
-    docker-compose down -v
+    ```python
+    cd yamdb_final
+    python3 -m venv venv
+    source venv/bin/activate
+    cd api_yamdb
+    pip install -r requirements.txt
+    cd ..
+    pytest
+    ```
+
+3. Запустить контейнер Docker:
+
+    - Проверить статус Docker:
+
+    ```python
+    docker --version
+    ```
+
+    - Запустить docker-compose:
+
+    ```python
+    cd infra/
+    docker-compose up -d
+    ```
+
+4. Выполнить миграции, создать суперпользователя и собрать статику:
+
+    ```python
+    docker-compose exec web python manage.py migrate
+    docker-compose exec web python manage.py createsuperuser
+    docker-compose exec web python manage.py collectstatic --no-input
+    ```
+
+5. Для запуска в виртуальном окружении, после создания и активации виртуального пространства, установки зависимостей, запустить проект локально:
+
+    Для Windows:
+
+    ```python
+    python manage.py runserver
+    ```
+
+    Для Mac/Linux:
+
+    ```python
+    python3 manage.py runserver
+    ```
+
+6. Проверить доступность сервиса:
+
+    ```python
+    http://158.160.66.251/admin
     ```
